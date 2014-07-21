@@ -74,17 +74,17 @@ public class Processor {
 		result.append("message", message);
 		result.append("module", request.getModuleName());
 		result.append("method", request.getMethodName());
-		createResponseArgs(result, request);
+		result.append("arguments", createResponseArgs(request));
 		return result.toString();
 	}
 
-	private static void createResponseArgs(BasicDBObject result, Request request) {
+	private static BasicDBList createResponseArgs(Request request) {
 		if (request.getArguments() == null || request.getArguments().length == 0)
 			return;
 		BasicDBList arguments = new BasicDBList();
 		for (Object argument : request.getArguments())
 			arguments.add(argument.toString());
-		result.append("arguments", arguments);
+		return arguments;
 	}
 
 }
