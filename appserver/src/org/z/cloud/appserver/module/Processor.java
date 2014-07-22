@@ -30,7 +30,7 @@ public class Processor {
 		Module module = getModule(request);
 		if (module == null)
 			return null;
-		if (isDefaultMethod(request))
+		if (isDefaultMethod(request.getMethodName()))
 			return module.service(request.getArguments());
 		return ClassUtil.execute(module, request.getMethodName(), request.getArguments());
 	}
@@ -39,34 +39,24 @@ public class Processor {
 		return ModuleFactory.INSTANCES.getModule(request.getModuleName());
 	}
 
-	private static boolean isDefaultMethod(Request request) {
-		String method = request.getMethodName();
-		if (StringUtil.isEmpty(method) || "service".equals(method))
+	private static boolean isDefaultMethod(String methodName) {
+		if (StringUtil.isEmpty(methodName) || "service".equals(methodName))
 			return true;
 		return false;
 	}
 
 	private static Response createErrorResponse(Request request) {
-		return new Response(false, null, createErrorMessage(request));
-	}
-
-	private static String createErrorMessage(Request request) {
-		return createResponseMessage(request, "fail");
+		return new Response(false, null, createResponseMessage(request, "fail"));
 	}
 
 	private static Response createSuccessResponse(Object result, Request request) {
-		return new Response(true, getResponseResult(request, result), createSuccessMessage(request));
+		return new Response(true, getResponseResult(request, result), createResponseMessage(request, "success"));
 	}
 
 	private static Object getResponseResult(Request request, Object result) {
 		if (result == getModule(request))
 			return "void";
-		else
-			return result;
-	}
-
-	private static String createSuccessMessage(Request request) {
-		return createResponseMessage(request, "success");
+		return result;
 	}
 
 	private static String createResponseMessage(Request request, String message) {
