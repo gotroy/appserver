@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.z.cloud.commom.module.Module;
+import org.z.cloud.common.module.Module;
 
 public class ModuleDemo implements Module {
 

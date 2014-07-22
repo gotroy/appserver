@@ -1,9 +1,9 @@
 package org.z.cloud.appserver.module;
 
-import org.z.cloud.commom.module.Module;
-import org.z.cloud.commom.module.ModuleFactory;
-import org.z.cloud.commom.processor.Request;
-import org.z.cloud.commom.processor.Response;
+import org.z.cloud.common.module.Module;
+import org.z.cloud.common.module.ModuleFactory;
+import org.z.cloud.common.processor.Request;
+import org.z.cloud.common.processor.Response;
 import org.z.cloud.common.util.ClassUtil;
 import org.z.cloud.common.util.StringUtil;
 
