@@ -80,7 +80,7 @@ public class Processor {
 
 	private static BasicDBList createResponseArgs(Object[] arguments) {
 		if (arguments == null || arguments.length == 0)
-			return;
+			return null;
 		BasicDBList result = new BasicDBList();
 		for (Object argument : arguments)
 			result.add(argument.toString());
