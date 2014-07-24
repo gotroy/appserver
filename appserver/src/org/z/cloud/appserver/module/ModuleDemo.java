@@ -14,6 +14,7 @@ public class ModuleDemo implements Module {
 
 	private ExecutorService pool = null;
 	private String moduleName = this.getClass().getSimpleName();
+	private long startTime = 0;
 
 	@Override
 	public Object service(Object... params) {
@@ -23,6 +24,7 @@ public class ModuleDemo implements Module {
 
 	@Override
 	public boolean start() {
+		startTime = System.currentTimeMillis();
 		pool = Executors.newCachedThreadPool();
 		return true;
 	}
@@ -54,6 +56,11 @@ public class ModuleDemo implements Module {
 	public boolean reStart() {
 		stop();
 		return start();
+	}
+
+	@Override
+	public long getStartTime() {
+		return startTime;
 	}
 
 }
