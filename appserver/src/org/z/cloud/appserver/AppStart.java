@@ -22,7 +22,7 @@ public class AppStart {
 
 	public static final Logger logger = LoggerFactory.getLogger(AppStart.class);
 
-	private static long begin = System.currentTimeMillis();
+	public static final long beginTime = System.currentTimeMillis();
 
 	private static void printLibraryPath() {
 		logger.info("java.library.path={}", new Object[] { System.getProperty("java.library.path") });
@@ -39,7 +39,7 @@ public class AppStart {
 	}
 
 	private static void printStartTime() {
-		logger.info("AppServer starting success in {} ms.", (System.currentTimeMillis() - begin));
+		logger.info("AppServer starting success in {} ms.", (System.currentTimeMillis() - beginTime));
 	}
 
 	public static void main(String[] args) {
