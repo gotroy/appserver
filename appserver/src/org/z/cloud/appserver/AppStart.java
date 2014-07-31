@@ -2,6 +2,7 @@ package org.z.cloud.appserver;
 
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.slf4j.Logger;
@@ -60,6 +61,12 @@ public class AppStart {
 	private static CloudJob createCloudJob(String jobGroup, String jobName) {
 		JobDetail jobDetail = JobBuilder.newJob(TestJob.class).withIdentity(jobName, jobGroup).build();
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroup).startNow().build();
+		return CloudJobFactory.builder(jobDetail, trigger, JobType.REMOTE).build();
+	}
+
+	protected static CloudJob createIntervalHourCloudJob(String jobGroup, String jobName, int hour) {
+		JobDetail jobDetail = JobBuilder.newJob(TestJob.class).withIdentity(jobName, jobGroup).build();
+		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroup).withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(hour).withRepeatCount(100)).build();
 		return CloudJobFactory.builder(jobDetail, trigger, JobType.REMOTE).build();
 	}
 
